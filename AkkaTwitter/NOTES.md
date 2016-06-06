@@ -8,4 +8,6 @@
 > In this file, we specify the Docker container we want to deploy, some variables like the number of CPUs or memory, and most importantly some environment variables for the container.
 
 from
-* https://blog.codecentric.de/en/2016/04/smack-stack-hands/ and https://github.com/ftrossbach/intro-to-dcos
+* https://blog.codecentric.de/en/2016/04/smack-stack-hands/
+
+The code in this module stems mainly from https://github.com/ftrossbach/intro-to-dcos
