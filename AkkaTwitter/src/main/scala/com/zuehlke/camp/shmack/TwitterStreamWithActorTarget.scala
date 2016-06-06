@@ -5,9 +5,10 @@ import com.typesafe.config.ConfigFactory
 import twitter4j.conf.ConfigurationBuilder
 import twitter4j.{FilterQuery, StatusListener, TwitterStream, TwitterStreamFactory}
 
-object TweetStream {
+object TwitterStreamWithActorTarget {
 
   def filterQuery = {
+    // TODO: Create a nice query
     val filter = new FilterQuery()
     filter.language("de,en")
     filter.track("a")
@@ -15,9 +16,9 @@ object TweetStream {
     filter
   }
 
-  def listener(target: ActorRef) = new TwitterStatusListener(target)
+  def listener(target: ActorRef) = new TweetToActorForwarder(target)
 
-  def apply(target: ActorRef) : TwitterStream = TweetStream(filterQuery, listener(target))
+  def apply(target: ActorRef) : TwitterStream = TwitterStreamWithActorTarget(filterQuery, listener(target))
 
   def apply(query : FilterQuery, listener: StatusListener) : TwitterStream = {
     val config = ConfigFactory.load()

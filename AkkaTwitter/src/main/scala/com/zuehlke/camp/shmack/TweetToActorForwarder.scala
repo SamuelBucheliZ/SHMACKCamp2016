@@ -4,13 +4,11 @@ import akka.actor.ActorRef
 import twitter4j.{StallWarning, Status, StatusDeletionNotice, StatusListener}
 
 
-class TwitterStatusListener(target: ActorRef) extends StatusListener{
+class TweetToActorForwarder(target: ActorRef) extends StatusListener {
   override def onStatus(status: Status): Unit = {
 
-    println((status.getCreatedAt, status.getText))
-
-    if(status.getCreatedAt != null)
-    target ! Tweet(status.getCreatedAt, status.getText)
+    if (status.getCreatedAt != null)
+      target ! Tweet(status.getCreatedAt, status.getText)
 
   }
 
