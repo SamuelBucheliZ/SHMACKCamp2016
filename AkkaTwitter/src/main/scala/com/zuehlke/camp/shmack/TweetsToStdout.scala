@@ -1,45 +1,15 @@
 package com.zuehlke.camp.shmack
 
-import akka.actor.{ActorRef, ActorSystem, Props}
-import akka.stream.ActorMaterializer
-import akka.stream.scaladsl.{Flow, Sink, Source}
-import com.typesafe.config.ConfigFactory
-import twitter4j.conf.ConfigurationBuilder
-import twitter4j.{FilterQuery, TwitterStreamFactory}
-
+import akka.actor.{ActorRef, Props}
+import akka.stream.scaladsl.{Sink, Source}
 
 object TweetsToStdout extends App {
 
-  implicit val actorSystem = ActorSystem("actorSystem")
-  implicit val materializer = ActorMaterializer()
-
   val source = Source.actorPublisher[Tweet](Props[TweetPublisher])
-  val flow: ActorRef = Flow[Tweet]
-    .filter(tweet => tweet.date != null && tweet.text != null)
-    .to(Sink.foreach(x => println(x)))
-    .runWith(source)
+  val sink = Sink.foreach[Tweet](t => println(t))
 
-  val config = ConfigFactory.load()
+  val tweetFlow: ActorRef = TweetFlow(source, sink)
 
-  val consumerKey = config.getString("akkatwitter.twitter.consumerKey")
-  val consumerSecret = config.getString("akkatwitter.twitter.consumerSecret")
-  val accessToken = config.getString("akkatwitter.twitter.accessToken")
-  val accessTokenSecret = config.getString("akkatwitter.twitter.accessTokenSecret")
-
-  val cb = new ConfigurationBuilder()
-  cb.setDebugEnabled(true)
-    .setOAuthConsumerKey(consumerKey)
-    .setOAuthConsumerSecret(consumerSecret)
-    .setOAuthAccessToken(accessToken)
-    .setOAuthAccessTokenSecret(accessTokenSecret)
-
-  var listener = new TwitterStatusListener(flow)
-  var twitterStream = new TwitterStreamFactory(cb.build()).getInstance()
-  twitterStream.addListener(listener)
-  var query = new FilterQuery()
-  query.language("de,en")
-  query.track("a")
-  twitterStream.filter(query)
-
+  val twitterStream = TweetStream(tweetFlow)
 
 }
