@@ -7,5 +7,5 @@ Some background reading on SMACK:
 * http://datastrophic.io/data-processing-platforms-architectures-with-spark-mesos-akka-cassandra-and-kafka/
 
 Deploy akka actors in docker containers:
-* [AkkaTwitter/NOTES.md]
+* [Notes](AkkaTwitter/NOTES.md)
 
