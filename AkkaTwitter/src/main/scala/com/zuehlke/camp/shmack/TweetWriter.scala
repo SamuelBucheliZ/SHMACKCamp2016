@@ -4,7 +4,7 @@ import akka.actor.Actor
 import com.datastax.driver.core.Cluster
 
 class TweetWriter(cluster: Cluster) extends Actor { // TODO: Make ActorSubscriber?
-  val keyspace = "something" // TODO: keyspace?
+  val keyspace = "zuehlke"
   val session = cluster.connect(keyspace)
   val preparedStatement = session.prepare("INSERT INTO tweets(date, text) VALUES (?, ?);") // TODO: check actual Cassandra scheme
 
