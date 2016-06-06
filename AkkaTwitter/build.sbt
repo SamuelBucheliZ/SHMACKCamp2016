@@ -1,6 +1,6 @@
 import sbtassembly.MergeStrategy
 
-name := "SHMACKCamp2016AkkaTwitter"
+name := "camp2016shmackakkatwitter"
 
 organization := "zuehlke"
 
@@ -18,7 +18,7 @@ dockerfile in docker := {
   new Dockerfile {
     from("java")
     add(artifact, artifactTargetPath)
-    entryPoint("java", "-cp", artifactTargetPath, "com.zuehlke.camp.shmack.TweetsToKafka")
+    entryPoint("java", "-cp", artifactTargetPath, "com.zuehlke.camp.shmack.TweetsToStdout")
   }
 }
 
@@ -34,13 +34,8 @@ val spark = "1.6.0"
 libraryDependencies ++= Seq(
 
   "org.twitter4j"                   %  "twitter4j-stream"          % "4.0.4",
-  "com.datastax.cassandra"          %  "cassandra-driver-core"     % "2.1.2",
-  "com.softwaremill.reactivekafka"  %% "reactive-kafka-core"       % "0.10.1",
-  "org.apache.spark"                %% "spark-streaming-kafka"     % spark,
-  "org.apache.spark"                %% "spark-core"                % spark % "provided",
-  "org.apache.spark"                %% "spark-streaming"           % spark % "provided",
-  "org.apache.spark"                %% "spark-sql"                 % spark % "provided",
-  "com.datastax.spark"              %% "spark-cassandra-connector" % "1.5.0",
+//  "com.datastax.cassandra"          %  "cassandra-driver-core"     % "2.1.2",
+  "com.softwaremill.reactivekafka"  %% "reactive-kafka-core"       % "0.8.2",
   "com.typesafe.akka"               %% "akka-stream-experimental"  % "2.0.4"
 
 )

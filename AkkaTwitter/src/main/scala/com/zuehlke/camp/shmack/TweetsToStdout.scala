@@ -13,9 +13,8 @@ object TweetsToStdout extends App {
   implicit val actorSystem = ActorSystem("actorSystem")
   implicit val materializer = ActorMaterializer()
 
-
   val source = Source.actorPublisher[Tweet](Props[TweetPublisher])
-  val ref: ActorRef = Flow[Tweet]
+  val flow: ActorRef = Flow[Tweet]
     .filter(tweet => tweet.date != null && tweet.text != null)
     .to(Sink.foreach(x => println(x)))
     .runWith(source)
@@ -34,7 +33,7 @@ object TweetsToStdout extends App {
     .setOAuthAccessToken(accessToken)
     .setOAuthAccessTokenSecret(accessTokenSecret)
 
-  var listener = new TwitterStatusListener(ref)
+  var listener = new TwitterStatusListener(flow)
   var twitterStream = new TwitterStreamFactory(cb.build()).getInstance()
   twitterStream.addListener(listener)
   var query = new FilterQuery()
