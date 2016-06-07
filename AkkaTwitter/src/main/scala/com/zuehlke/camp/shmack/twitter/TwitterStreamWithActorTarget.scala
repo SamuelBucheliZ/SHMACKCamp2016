@@ -1,4 +1,4 @@
-package com.zuehlke.camp.shmack
+package com.zuehlke.camp.shmack.twitter
 
 import akka.actor.ActorRef
 import com.typesafe.config.ConfigFactory

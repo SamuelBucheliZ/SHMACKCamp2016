@@ -1,6 +1,7 @@
-package com.zuehlke.camp.shmack
+package com.zuehlke.camp.shmack.twitter
 
 import akka.actor.ActorRef
+import com.zuehlke.camp.shmack.Tweet
 import twitter4j.{StallWarning, Status, StatusDeletionNotice, StatusListener}
 
 

@@ -33,6 +33,7 @@ val spark = "1.6.0"
 
 libraryDependencies ++= Seq(
 
+  "org.slf4j"                       %  "slf4j-simple"              % "1.7.21",
   "org.twitter4j"                   %  "twitter4j-stream"          % "4.0.4",
   "com.datastax.cassandra"          %  "cassandra-driver-core"     % "2.1.2",
   "com.softwaremill.reactivekafka"  %% "reactive-kafka-core"       % "0.8.2",
