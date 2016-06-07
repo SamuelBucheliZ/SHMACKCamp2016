@@ -1,0 +1,33 @@
+{
+ "id": "shmack-web-app",
+ "instances": 1,
+ "container":{
+   "docker":{
+     "forcePullImage":true,
+     "image":"mhaspra/shmack-web-app",
+     "network":"BRIDGE",
+     "privileged": false,
+     "portMappings": [
+                {
+                    "containerPort": 18080,
+                    "hostPort": 0,
+                    "servicePort": 10000,
+                    "protocol": "tcp"
+                }
+            ]
+   },
+   "type":"DOCKER"
+ },
+ "healthChecks": [{
+        "protocol": "HTTP",
+        "portIndex": 0
+    }],
+"labels":{
+        "HAPROXY_GROUP":"external",
+	"HAPROXY_0_VHOST":"<enter public load balancer dns name>",
+        "HAPROXY_0_PORT": "8082"
+    },
+    "ports": [0],
+ "cpus":1,
+ "mem":1024
+}
