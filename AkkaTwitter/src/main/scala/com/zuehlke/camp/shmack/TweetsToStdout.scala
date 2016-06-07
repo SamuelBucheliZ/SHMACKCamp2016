@@ -5,6 +5,7 @@ import akka.stream.scaladsl.{Sink, Source}
 import com.zuehlke.camp.shmack.akkastream.{TweetFlow, TweetPublisher, TweetSubscriber}
 import com.zuehlke.camp.shmack.twitter.TwitterStreamWithActorTarget
 
+// for simple testing
 object TweetsToStdout extends App {
 
   val source = Source.actorPublisher[Tweet](Props[TweetPublisher])

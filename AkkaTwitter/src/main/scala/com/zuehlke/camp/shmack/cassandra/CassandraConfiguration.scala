@@ -22,5 +22,5 @@ class ConfigCassandraCluster extends CassandraCluster {
       withPort(port).
       build()
 
-  lazy val keyspace: String = config.getString("akkatwitter.cassandra.keysapce")
+  lazy val keyspace: String = config.getString("akkatwitter.cassandra.keyspace")
 }

@@ -7,13 +7,18 @@ import com.zuehlke.camp.shmack.cassandra.{CassandraOutput, ConfigCassandraCluste
 import com.zuehlke.camp.shmack.twitter.TwitterStreamWithActorTarget
 
 object TweetsToCassandra extends App {
+  // create source for tweet flow
+  val source = Source.actorPublisher[Tweet](Props[TweetPublisher])
 
+  // create sink with cassandra output for tweet flow
   val cassandra = new ConfigCassandraCluster()
   val cassandraOutput = new CassandraOutput(cassandra)
-  val source = Source.actorPublisher[Tweet](Props[TweetPublisher])
   val sink = Sink.actorSubscriber(Props(new TweetSubscriber(cassandraOutput)))
+
+  // set up tweet flow with given source and sink
   val tweetFlow: ActorRef = TweetFlow(source, sink)
 
+  // connect twitter stream to tweet flow
   val twitterStream = TwitterStreamWithActorTarget(tweetFlow)
 
 }
