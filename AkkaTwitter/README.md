@@ -10,4 +10,6 @@
 from
 * https://blog.codecentric.de/en/2016/04/smack-stack-hands/
 
-The code in this module stems mainly from https://github.com/ftrossbach/intro-to-dcos
+The code in this module is based on
+ - https://github.com/ftrossbach/intro-to-dcos for reading tweets and creating docker containers
+ - https://github.com/eigengo/activator-akka-cassandra (see also http://www.lightbend.com/activator/template/activator-akka-cassandra ) for storing tweets in Cassandra

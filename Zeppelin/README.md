@@ -10,7 +10,6 @@
 7. Restart Zeppelin
 8. Open Zeppelin with ${HOME}/shmack/repo/04_implementation/scripts/open-shmack-zeppelin.sh
 
-
 ## Connect Zeppelin to Cassandra
 1. In the SHMACK VM type dcos cassandra connection
 2. Insert one of the dns names (without the port) in the cassandra interpreter config in Zeppelin
