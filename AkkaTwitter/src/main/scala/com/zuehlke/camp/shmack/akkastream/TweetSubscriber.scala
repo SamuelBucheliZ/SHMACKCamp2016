@@ -7,15 +7,23 @@ import com.zuehlke.camp.shmack.{Tweet, TweetOutput}
 
 class TweetSubscriber(output: TweetOutput) extends ActorSubscriber with ActorLogging {
 
-  def receive: Receive = {
-    case OnNext(tweet@Tweet(_, _)) =>
-      log.debug("Got tweet {}", tweet)
-      output.save(tweet)
+  override def receive: Receive = {
+    case OnNext(next) =>
+      handleNext(next)
     case OnComplete =>
-      log.info("No more tweets left")
+      log.info("No more tweets left in flow")
+      context.stop(self)
     case OnError(cause) =>
       log.error(cause, "Error in tweet flow")
   }
 
-  override protected def requestStrategy: RequestStrategy = OneByOneRequestStrategy // TODO: Figure out what to use here
+  def handleNext(message : Any) = message match {
+    case tweet : Tweet =>
+      log.debug("Got tweet {}", tweet)
+      output.save(tweet)
+    case other =>
+      log.warning("Got unknown item {}", other)
+  }
+
+  override protected def requestStrategy: RequestStrategy = OneByOneRequestStrategy // TODO: Figure out what to best use here
 }

@@ -2,11 +2,13 @@ import sbtassembly.MergeStrategy
 
 name := "camp2016shmackakkatwitter"
 
-organization := "zuehlke"
+organization := "zuehlkecamp2016"
 
 version := "1.0"
 
 scalaVersion := "2.10.5"
+
+mainClass in assembly := Some("com.zuehlke.camp.shmack.TweetsToCassandra")
 
 enablePlugins(DockerPlugin)
 
@@ -18,7 +20,7 @@ dockerfile in docker := {
   new Dockerfile {
     from("java")
     add(artifact, artifactTargetPath)
-    entryPoint("java", "-cp", artifactTargetPath, "com.zuehlke.camp.shmack.TweetsToStdout")
+    entryPoint("java", "-cp", artifactTargetPath, "com.zuehlke.camp.shmack.TweetsToCassandra")
   }
 }
 
@@ -28,8 +30,6 @@ imageNames in docker := Seq(
 )
 
 buildOptions in docker := BuildOptions(cache = false)
-
-val spark = "1.6.0"
 
 libraryDependencies ++= Seq(
 
@@ -41,12 +41,6 @@ libraryDependencies ++= Seq(
 
 )
 
-
-//some exclusions and merge strategies for assembly
-excludeDependencies ++= Seq(
-  "org.spark-project.spark" % "unused"
-
-)
 
 assemblyMergeStrategy in assembly := {
   case PathList("META-INF", "MANIFEST.MF") => MergeStrategy.discard
