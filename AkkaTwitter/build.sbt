@@ -1,6 +1,6 @@
 import sbtassembly.MergeStrategy
 
-name := "camp2016shmackakkatwitter"
+name := "akkatwitter"
 
 organization := "zuehlkecamp2016"
 

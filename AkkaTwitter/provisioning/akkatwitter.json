@@ -1,0 +1,29 @@
+{
+  "id": "ingestion",
+  "container":{
+    "docker":{
+      "forcePullImage":true,
+      "image":"zuehlkecamp2016/akkatwitter",
+      "network":"BRIDGE",
+      "parameters":[
+
+      ],
+      "privileged":false
+    },
+    "type":"DOCKER",
+    "volumes":[
+
+    ]
+  },
+  "cpus":1,
+  "mem":2048,
+  "env":{
+    "akkatwitter.cassandra.port":"9042",
+    "akkatwitter.cassandra.hosts":"localhost",
+    "akkatwitter.cassandra.keyspace":"zuehlke",
+    "akkatwitter.twitter.accessToken":"****",
+    "akkatwitter.twitter.accessTokenSecret":"****",
+    "akkatwitter.twitter.consumerKey":"****",
+    "akkatwitter.twitter.consumerSecret":"****"
+  }
+}
