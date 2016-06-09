@@ -3,8 +3,8 @@
 ## Run Spark locally
 
 1. Pre-conditions:
-* [Cassandra started locally in Docker container](../Cassandra/README.md)
-* [Cassandra filled with tweets](../AkkaTwitter/README.md)
+   - [Cassandra started locally in Docker container](../Cassandra/README.md)
+   - [Cassandra filled with tweets](../AkkaTwitter/README.md)
 
 2. Download Spark sources from http://spark.apache.org/
 
