@@ -11,5 +11,6 @@ Some background reading on SMACK:
 * [Cassandra](Cassandra/README.md)
 * [Spark](Spark/README.md)
 * [WebApp](WebApp/README.md)
+* [MobileApp](MobileApp/README.md)
 * [Zeppelin](Zeppelin/README.md)
 
