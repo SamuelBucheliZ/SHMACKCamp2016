@@ -11,7 +11,7 @@ import {
     View,
     ListView,
     StyleSheet,
-    TouchableHighlight,
+    TouchableNativeFeedback,
     Image,
 } from 'react-native';
 import {
@@ -36,21 +36,23 @@ class TweetList extends Component {
     }
 
     renderTweet(tweet) {
-        let author = tweet.author ? tweet.author : 'Unknown';
+        let author = tweet.username ? tweet.username : 'Unknown';
 
         return (
-            <TouchableHighlight onPress={() => this.props.navigator.push({name: routes.showTweet, tweet: tweet})}>
+            <TouchableNativeFeedback
+                onPress={() => this.props.navigator.push({name: routes.showTweet, tweet: tweet})}
+                background={TouchableNativeFeedback.Ripple('#2196F3')}>
                 <View style={styles.listItem}>
                     <Image
                         style={styles.icon}
                         source={require('../img/ic_person_outline_black.png')} />
                     <View style={styles.content}>
                         <Text style={styles.author}>@{author} </Text>
-                        <Text style={styles.text}>{tweet.text}</Text>
+                        <Text style={styles.text} numberOfLines={1}>{tweet.text}</Text>
                         <View style={styles.divider} />
                     </View>
                 </View>
-            </TouchableHighlight>
+            </TouchableNativeFeedback>
         )
     }
 }
@@ -81,10 +83,12 @@ var styles = StyleSheet.create({
     text: {
         fontSize: 16,
         color: '#00000087',
+        marginRight: 16,
     },
     author: {
         fontSize: 14,
         color: '#00000054',
+        marginRight: 16,
     },
     icon: {
         width: 40,

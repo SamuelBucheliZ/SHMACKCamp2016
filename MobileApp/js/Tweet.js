@@ -7,17 +7,19 @@ import {
     Text,
     View,
     StyleSheet,
-    TouchableHighlight,
+    TouchableNativeFeedback,
     Image,
 } from 'react-native';
 
 export default class Tweet extends Component {
 
     render() {
-        let author = this.props.tweet.author ? this.props.tweet.author : 'Unknown';
+        let author = this.props.tweet.username ? this.props.tweet.username : 'Unknown';
 
         return (
-            <TouchableHighlight onPress={() => this.props.navigator.pop()}>
+            <TouchableNativeFeedback
+                onPress={() => this.props.navigator.pop()}
+                background={TouchableNativeFeedback.Ripple('#2196F3')}>
                 <View style={styles.container}>
                     <Image
                         style={styles.icon}
@@ -27,7 +29,7 @@ export default class Tweet extends Component {
                         <Text style={styles.text}>{this.props.tweet.text}</Text>
                     </View>
                 </View>
-            </TouchableHighlight>
+            </TouchableNativeFeedback>
         )
     }
 }

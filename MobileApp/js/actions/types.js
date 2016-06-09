@@ -1,6 +1,6 @@
 'use strict';
 
-var REQUEST_URL = 'http://ec2-54-183-163-134.us-west-1.compute.amazonaws.com:8083/tweets';
+var REQUEST_URL = 'http://ec2-54-153-27-207.us-west-1.compute.amazonaws.com:8083/tweets';
 
 export function clicked() {
     return {
@@ -24,15 +24,15 @@ export function openTweet(tweet) {
 
 export function loadTweets(data) {
     return (dispatch) => {
-        // fetch(REQUEST_URL)
-        //     .then((response) => response.json())
-        //     .then((responseData) => {
-        //         dispatch(updateTweets(responseData.rows));
-        //     })
-        //     .done();
-        setTimeout(() =>
-            dispatch(updateTweets([{text: 'Tweet One', author: 'Author 1'}, {text: 'Tweet Two', author: 'Author 2'}])),
-            1000);
+        fetch(REQUEST_URL)
+            .then((response) => response.json())
+            .then((responseData) => {
+                dispatch(updateTweets(responseData.rows));
+            })
+            .done();
+        // setTimeout(() =>
+        //     dispatch(updateTweets([{text: 'Tweet One', author: 'Author 1'}, {text: 'Tweet Two', author: 'Author 2'}])),
+        //     1000);
     };
 }
 
