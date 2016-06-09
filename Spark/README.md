@@ -177,4 +177,4 @@ Serialization stack:
 	at org.apache.spark.util.ClosureCleaner$.ensureSerializable(ClosureCleaner.scala:301)
 	... 63 more
 ```
-Somehow, it seems, that the SparkConf ends up in the closure of something that that is sent to a node, but it is not serializable... We haven't figured out yet, how to solve this.
+Somehow, it seems, that the SparkConf ends up in the closure of something that that is sent to a node, but it is not serializable... We haven't figured out yet, how to solve this. However, this works, when creating a proper Scala app, see [here](../SparkCassandra/README.md)
