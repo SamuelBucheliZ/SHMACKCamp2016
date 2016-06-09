@@ -18,12 +18,15 @@ const app = express();
 app.use(bodyParser.json());
 app.set('json spaces', 2);
 
-var getAllTweets = 'SELECT * FROM zuehlke.tweets'
 app.get('/tweets', function (req, res) {
-console.log('get the tweets');
-  client.execute(getAllTweets, [ ], function(err, result) {
+  var limit = 100;
+  if(req.query && req.query.limit){
+  	limit = req.query.limit;
+  }
+  console.log('Getting ' + limit + ' tweets');
+  client.execute('SELECT * FROM zuehlke.tweets limit ' + limit, function(err, result) {
         if (err) {
-            res.status(404).send({ msg : 'Tweets not found.' });
+            res.status(404).send({ msg : err });
         } else {
             res.json(result);        }
     });
