@@ -11,7 +11,7 @@ object TwitterWordCount extends App {
   val sc = new SparkContext(conf)
 
   val stopWordsInputStream = getClass.getResourceAsStream("/stopWords.txt")
-  val stopWords =  scala.io.Source.fromInputStream(stopWordsInputStream).getLines().toSet
+  val stopWords =  scala.io.Source.fromInputStream(stopWordsInputStream).getLines().filter(line => !line.startsWith("#")).toSet
   val stopWordsBroadcast = sc.broadcast(stopWords)
 
   val tweetsTable = sc.cassandraTable[Tweet]("zuehlke", "tweets")
@@ -19,8 +19,8 @@ object TwitterWordCount extends App {
   tweetsTable
     .map(tweet => tweet.text)
     .flatMap(text => text.split("\\s"))
-    .map(word => word.toLowerCase)
-    .filter(word => !stopWordsBroadcast.value.contains(word))
+    .map(word => word.filter(Character.isLetter(_)).toLowerCase)
+    .filter(word => !word.isEmpty && !stopWordsBroadcast.value.contains(word))
     .map(word => (word, 1))
     .reduceByKey(_ + _)
     .sortBy(tuple => tuple._2, ascending = false)
