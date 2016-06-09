@@ -95,7 +95,6 @@ var styles = StyleSheet.create({
 });
 
 function select(store) {
-    console.log("store", store);
     return {
         loaded: store.tweets.loaded,
         tweets: store.tweets,
