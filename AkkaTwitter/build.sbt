@@ -37,7 +37,8 @@ libraryDependencies ++= Seq(
   "org.twitter4j"                   %  "twitter4j-stream"             % "4.0.4",
   "com.datastax.cassandra"          %  "cassandra-driver-core"        % "3.0.2",
   "org.xerial.snappy"               %  "snappy-java"                  % "1.1.2.6",
-  "com.typesafe.akka"               %% "akka-stream-experimental"     % "2.0.4"
+  "com.typesafe.akka"               %% "akka-stream-experimental"     % "2.0.4",
+  "com.datastax.cassandra"          % "cassandra-driver-mapping"      % "3.0.2"
 
 )
 

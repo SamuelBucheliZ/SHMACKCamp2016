@@ -3,6 +3,7 @@ package com.zuehlke.camp.shmack.twitter
 import akka.actor.ActorRef
 import com.zuehlke.camp.shmack.Tweet
 import twitter4j.{StallWarning, Status, StatusDeletionNotice, StatusListener}
+import scala.collection.JavaConverters._
 
 
 class TweetToActorForwarder(target: ActorRef) extends StatusListener {
@@ -10,8 +11,8 @@ class TweetToActorForwarder(target: ActorRef) extends StatusListener {
 
     if (status.getCreatedAt != null)
       target ! Tweet(status.getCreatedAt, status.getText, status.getFavoriteCount, status.getRetweetCount,
-        status.getUser.getName, status.getHashtagEntities().map(e => e.getText), status.getURLEntities().map(e => e.getText),
-        status.getUserMentionEntities().map(e => e.getText))
+        status.getUser.getName, status.getHashtagEntities().map(e => e.getText).toList.asJava, status.getURLEntities().map(e => e.getText).toList.asJava,
+        status.getUserMentionEntities().map(e => e.getText).toList.asJava)
 
   }
 
