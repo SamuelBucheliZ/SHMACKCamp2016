@@ -1,0 +1,17 @@
+{
+  "name": "AwesomeProject",
+  "scripts": {
+    "flow": "flow"
+  },
+  "dependencies": {
+    "react": "",
+    "react-native": "0.28.0-rc.0",
+    "react-redux": "",
+    "react-relay": "",
+    "redux": "",
+    "redux-thunk": ""
+  },
+  "devDependencies": {
+    "flow-bin": "^0.26.0"
+  }
+}
