@@ -19,7 +19,7 @@ object TwitterWordCount extends App {
   tweetsTable
     .map(tweet => tweet.text)
     .flatMap(text => text.split("\\s"))
-    .map(word => word.filter(Character.isLetter(_)).toLowerCase)
+    .map(word => word.filter(Character.isLetter).toLowerCase)
     .filter(word => !word.isEmpty && !stopWordsBroadcast.value.contains(word))
     .map(word => (word, 1))
     .reduceByKey(_ + _)
