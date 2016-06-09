@@ -16,9 +16,12 @@ The code in this module is based on
 from
 * https://blog.codecentric.de/en/2016/04/smack-stack-hands/
 
-Build using
+## Build 
+Use
 - ```sbt assembly``` for a fat jar
 - ```sbt docker``` to get a docker image
+
+Note: The Scala Build Tool can take quite a while...
 
 ## Running AkkaTwitter
 
@@ -38,6 +41,8 @@ Java properties that can be set (and currently used default values):
 ```
 
 Alternatively, you can also set them via ```application.conf```
+
+Note: For quick local tests without Cassandra, there is TweetsToStdOut
 
  
  
