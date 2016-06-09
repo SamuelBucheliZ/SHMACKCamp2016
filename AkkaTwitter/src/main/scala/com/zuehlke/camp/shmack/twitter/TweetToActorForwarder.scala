@@ -9,7 +9,9 @@ class TweetToActorForwarder(target: ActorRef) extends StatusListener {
   override def onStatus(status: Status): Unit = {
 
     if (status.getCreatedAt != null)
-      target ! Tweet(status.getCreatedAt, status.getText)
+      target ! Tweet(status.getCreatedAt, status.getText, status.getFavoriteCount, status.getRetweetCount,
+        status.getUser.getName, status.getHashtagEntities().map(e => e.getText), status.getURLEntities().map(e => e.getText),
+        status.getUserMentionEntities().map(e => e.getText))
 
   }
 

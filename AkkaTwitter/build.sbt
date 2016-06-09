@@ -33,11 +33,11 @@ buildOptions in docker := BuildOptions(cache = false)
 
 libraryDependencies ++= Seq(
 
-  "org.slf4j"                       %  "slf4j-simple"              % "1.7.21",
-  "org.twitter4j"                   %  "twitter4j-stream"          % "4.0.4",
-  "com.datastax.cassandra"          %  "cassandra-driver-core"     % "2.1.2",
-  "com.softwaremill.reactivekafka"  %% "reactive-kafka-core"       % "0.8.2",
-  "com.typesafe.akka"               %% "akka-stream-experimental"  % "2.0.4"
+  "org.slf4j"                       %  "slf4j-simple"                 % "1.7.21",
+  "org.twitter4j"                   %  "twitter4j-stream"             % "4.0.4",
+  "com.datastax.cassandra"          %  "cassandra-driver-core"        % "3.0.2",
+  "org.xerial.snappy"               %  "snappy-java"                  % "1.1.2.6",
+  "com.typesafe.akka"               %% "akka-stream-experimental"     % "2.0.4"
 
 )
 
