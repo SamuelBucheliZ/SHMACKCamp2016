@@ -6,6 +6,11 @@ Set up your cluster:
 Some background reading on SMACK:
 * http://datastrophic.io/data-processing-platforms-architectures-with-spark-mesos-akka-cassandra-and-kafka/
 
-Deploy akka actors in docker containers:
-* [Notes](AkkaTwitter/NOTES.md)
+#Notes
+* [AkkaTwitter](AkkaTwitter/README.md)
+* [Cassandra](Cassandra/README.md)
+* [Spark](Spark/README.md)
+* [WebApp](WebApp/README.md)
+* [MobileApp](MobileApp/README.md)
+* [Zeppelin](Zeppelin/README.md)
 
