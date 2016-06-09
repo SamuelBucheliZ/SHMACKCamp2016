@@ -10,6 +10,7 @@ Some background reading on SMACK:
 * [AkkaTwitter](AkkaTwitter/README.md)
 * [Cassandra](Cassandra/README.md)
 * [Spark](Spark/README.md)
+* [SparkCassandra (TwitterWordCount)](SparkCassandra/README.md)
 * [WebApp](WebApp/README.md)
 * [MobileApp](MobileApp/README.md)
 * [Zeppelin](Zeppelin/README.md)

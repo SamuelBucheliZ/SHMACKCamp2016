@@ -6,6 +6,7 @@ import {
     View,
     StyleSheet,
     Navigator,
+    BackAndroid,
 } from 'react-native';
 import TweetList from './TweetList';
 import Tweet from './Tweet';
@@ -16,6 +17,23 @@ export const routes = {
 }
 
 export default class AANavigator extends Component {
+    navigator;
+
+    constructor() {
+        super();
+
+        this.handleBackButton = this.handleBackButton.bind(this);
+        this.renderScene = this.renderScene.bind(this);
+    }
+
+    componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    componentWillUnmount() {
+        BackAndroid.removeEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
     render() {
         return (
             <Navigator
@@ -26,6 +44,8 @@ export default class AANavigator extends Component {
     }
 
     renderScene(route, navigator) {
+        this.navigator = navigator;
+
         if(route.name === routes.showTweet) {
             
             console.log('Navigating to Tweet', route.tweet);
@@ -35,6 +55,13 @@ export default class AANavigator extends Component {
             
             console.log('Navigating to TweetList');
             return <TweetList navigator={navigator}/>;
+        }
+    }
+
+    handleBackButton() {
+        if (this.navigator && this.navigator.getCurrentRoutes().length > 1) {
+            this.navigator.pop();
+            return true;
         }
     }
 }

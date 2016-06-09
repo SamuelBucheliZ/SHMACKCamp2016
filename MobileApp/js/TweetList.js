@@ -11,7 +11,8 @@ import {
     View,
     ListView,
     StyleSheet,
-    TouchableHighlight,
+    TouchableNativeFeedback,
+    Image,
 } from 'react-native';
 import {
     openTweet,
@@ -25,77 +26,77 @@ import {
 class TweetList extends Component {
 
     render() {
-        if(this.props.activeTweet && this.props.activeTweet.text) {
-            return (
-                <View>
-                    <Text onPress={this.props.back}>Show tweet</Text>
-                </View>
-            )
-        }
-        if(this.props.loaded) {
-            return (
-                <View style={styles.container}>
-                    <ListView
-                        dataSource={this.props.tweets.list}
-                        renderRow={this.renderTweet.bind(this)}
-                        contentContainerStyle={styles.listView}
-                    />
-                </View>
-            );
-        } else {
-            return (
-                <View style={styles.container}>
-                    <Text>Loading...</Text>
-                </View>
-            );
-        }
+        return (
+            <ListView
+                dataSource={this.props.tweets.list}
+                renderRow={this.renderTweet.bind(this)}
+                contentContainerStyle={styles.listView}
+            />
+        );
     }
 
     renderTweet(tweet) {
-        let author = tweet.author ? tweet.author : 'Unknown';
+        let author = tweet.username ? tweet.username : 'Unknown';
 
         return (
-            <TouchableHighlight onPress={() => this.props.navigator.push({name: routes.showTweet, tweet: tweet})}>
+            <TouchableNativeFeedback
+                onPress={() => this.props.navigator.push({name: routes.showTweet, tweet: tweet})}
+                background={TouchableNativeFeedback.Ripple('#2196F3')}>
                 <View style={styles.listItem}>
-                    <Text style={styles.author}>@{author} </Text>
-                    <Text style={styles.text}>{tweet.text}</Text>
+                    <Image
+                        style={styles.icon}
+                        source={require('../img/ic_person_outline_black.png')} />
+                    <View style={styles.content}>
+                        <Text style={styles.author}>@{author} </Text>
+                        <Text style={styles.text} numberOfLines={1}>{tweet.text}</Text>
+                        <View style={styles.divider} />
+                    </View>
                 </View>
-            </TouchableHighlight>
+            </TouchableNativeFeedback>
         )
     }
 }
 
 var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'stretch',
-        backgroundColor: '#F5FCFF',
-    },
     listView: {
+        flex: 1,
         flexDirection: 'column',
         backgroundColor: '#F5FCFF',
         paddingLeft: 16,
-        paddingRight: 16,
         paddingTop: 8,
     },
     listItem: {
+        flex: 1,
+        flexDirection: 'row',
         paddingBottom: 8,
     },
-
+    divider: {
+        flex: 1,
+        height: 1,
+        backgroundColor: '#00000012',
+        marginTop: 8,
+    },
+    content: {
+        flex: 1,
+        paddingLeft: 16,
+    },
     text: {
         fontSize: 16,
         color: '#00000087',
+        marginRight: 16,
     },
     author: {
         fontSize: 14,
         color: '#00000054',
+        marginRight: 16,
+    },
+    icon: {
+        width: 40,
+        height: 40,
     },
 });
 
 function select(store) {
-    console.log("store", store);
     return {
         loaded: store.tweets.loaded,
         tweets: store.tweets,
