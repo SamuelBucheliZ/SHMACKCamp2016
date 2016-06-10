@@ -1,29 +1,15 @@
 {
-  "id": "ingestion",
+  "id": "akkatwitter",
   "container":{
     "docker":{
       "forcePullImage":true,
-      "image":"zuehlkecamp2016/akkatwitter",
+      "image":"mhaspra/akkatwitter",
       "network":"BRIDGE",
-      "parameters":[
-
-      ],
       "privileged":false
     },
-    "type":"DOCKER",
-    "volumes":[
-
-    ]
+    "type":"DOCKER"
   },
+  "cmd": "java -Dakkatwitter.cassandra.hosts.0=node-0.cassandra.mesos -Dakkatwitter.twitter.accessToken=<> -Dakkatwitter.twitter.accessTokenSecret=<> -Dakkatwitter.twitter.consumerKey=<> -Dakkatwitter.twitter.consumerSecret=<> -cp /app/akkatwitter-assembly-1.0.jar com.zuehlke.camp.shmack.TweetsToCassandra",
   "cpus":1,
-  "mem":2048,
-  "env":{
-    "akkatwitter.cassandra.port":"9042",
-    "akkatwitter.cassandra.hosts":"localhost",
-    "akkatwitter.cassandra.keyspace":"zuehlke",
-    "akkatwitter.twitter.accessToken":"****",
-    "akkatwitter.twitter.accessTokenSecret":"****",
-    "akkatwitter.twitter.consumerKey":"****",
-    "akkatwitter.twitter.consumerSecret":"****"
-  }
+  "mem":2048
 }
